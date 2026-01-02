@@ -4,6 +4,10 @@
     "forceConsistentCasingInFileNames": true,
     "skipLibCheck": true,
     "noImplicitOverride": true,
-    "noUncheckedIndexedAccess": true
+    "noUncheckedIndexedAccess": true,
+    "baseUrl": ".",
+    "paths": {
+      "@url-shortener/*": ["packages/*/src"]
+    }
   }
 }
