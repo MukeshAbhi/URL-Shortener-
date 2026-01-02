@@ -15,10 +15,10 @@
   "devDependencies": {
     "@types/express": "^5.0.6",
     "@types/node": "^25.0.3",
-    "typescript": "^5.9.3",
-    "@url-shortener/rate-limiter": "workspace:*"
+    "typescript": "^5.9.3"
   },
   "dependencies": {
+    "@url-shortener/rate-limiter": "workspace:*",
     "dotenv": "^17.2.3",
     "express": "^5.2.1",
     "zod": "^4.2.1"

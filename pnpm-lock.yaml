@@ -10,6 +10,9 @@ importers:
 
   apps/api-service:
     dependencies:
+      '@url-shortener/rate-limiter':
+        specifier: workspace:*
+        version: link:../../packages/rate-limiter
       dotenv:
         specifier: ^17.2.3
         version: 17.2.3
@@ -67,6 +70,9 @@ importers:
       '@types/node':
         specifier: ^25.0.3
         version: 25.0.3
+      typescript:
+        specifier: ^5.9.3
+        version: 5.9.3
 
   packages/redis:
     dependencies:

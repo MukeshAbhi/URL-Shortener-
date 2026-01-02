@@ -6,13 +6,17 @@
   "scripts": {
     "dev:api": "pnpm --filter api-service run dev",
     "dev:redirect": "pnpm --filter redirect-service run dev",
-    "dev": "pnpm run dev:api & pnpm run dev:redirect",
+    "dev": "pnpm -r --parallel --filter api-service --filter redirect-service run dev",
+
+    "build:packages": "pnpm -r --filter ./packages/** --if-present run build",
     "build:api": "pnpm --filter api-service run build",
     "build:redirect": "pnpm --filter redirect-service run build",
-    "build": "pnpm run build:api & pnpm run build:redirect",
+
+    "build": "pnpm run build:packages && pnpm run build:api && pnpm run build:redirect",
+
     "start:api": "pnpm --filter api-service run start",
     "start:redirect": "pnpm --filter redirect-service run start",
-    "start": "pnpm run start:api & pnpm run start:redirect"
+    "start": "pnpm run start:api && pnpm run start:redirect"
   },
   "keywords": [],
   "author": "",

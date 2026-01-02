@@ -1,7 +1,5 @@
 import { getRedis } from '@url-shortener/redis';
 
-const redis = getRedis(); 
-
 /**
  * Token bucket rate limiter (atomic via Lua)
  *
@@ -14,6 +12,9 @@ export async function rateLimit(
   capacity: number,
   refillRate: number
 ): Promise<{ allowed: boolean; remaining: number }> {
+  // Get Redis instance (lazy initialization)
+  const redis = getRedis();
+
   // Current timestamp in seconds
   const now = Math.floor(Date.now() / 1000);
 
