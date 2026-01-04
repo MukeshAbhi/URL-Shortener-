@@ -1,10 +1,12 @@
-import dotenv from 'dotenv';
-import path from 'path';
 import express from 'express';
 import { rateLimit } from '@url-shortener/rate-limiter';
+import { env } from '@url-shortener/config';
+import { initRedis } from '@url-shortener/redis';
 
-// Load .env from the root of the monorepo
-dotenv.config({ path: path.resolve(__dirname, '../../..', '.env') });
+initRedis({
+  url: env.UPSTASH_REDIS_REST_URL,
+  token: env.UPSTASH_REDIS_REST_TOKEN,
+})
 
 const app = express();
 

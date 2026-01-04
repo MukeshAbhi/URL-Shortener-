@@ -19,7 +19,8 @@
   },
   "dependencies": {
     "@url-shortener/rate-limiter": "workspace:*",
-    "dotenv": "^17.2.3",
+    "@url-shortener/config": "workspace:*",
+    "@url-shortener/redis": "workspace:*",
     "express": "^5.2.1",
     "zod": "^4.2.1"
   }

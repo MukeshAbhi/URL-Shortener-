@@ -12,7 +12,6 @@ export async function rateLimit(
   capacity: number,
   refillRate: number
 ): Promise<{ allowed: boolean; remaining: number }> {
-  // Get Redis instance (lazy initialization)
   const redis = getRedis();
 
   // Current timestamp in seconds

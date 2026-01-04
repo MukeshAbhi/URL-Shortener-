@@ -10,12 +10,15 @@ importers:
 
   apps/api-service:
     dependencies:
+      '@url-shortener/config':
+        specifier: workspace:*
+        version: link:../../packages/config
       '@url-shortener/rate-limiter':
         specifier: workspace:*
         version: link:../../packages/rate-limiter
-      dotenv:
-        specifier: ^17.2.3
-        version: 17.2.3
+      '@url-shortener/redis':
+        specifier: workspace:*
+        version: link:../../packages/redis
       express:
         specifier: ^5.2.1
         version: 5.2.1
@@ -55,11 +58,39 @@ importers:
         specifier: ^5.9.3
         version: 5.9.3
 
-  packages/base62: {}
+  packages/base62:
+    devDependencies:
+      '@types/node':
+        specifier: ^25.0.3
+        version: 25.0.3
+      typescript:
+        specifier: ^5.9.3
+        version: 5.9.3
 
-  packages/config: {}
+  packages/config:
+    dependencies:
+      dotenv:
+        specifier: ^17.2.3
+        version: 17.2.3
+      zod:
+        specifier: ^4.2.1
+        version: 4.2.1
+    devDependencies:
+      '@types/node':
+        specifier: ^25.0.3
+        version: 25.0.3
+      typescript:
+        specifier: ^5.9.3
+        version: 5.9.3
 
-  packages/db: {}
+  packages/db:
+    devDependencies:
+      '@types/node':
+        specifier: ^25.0.3
+        version: 25.0.3
+      typescript:
+        specifier: ^5.9.3
+        version: 5.9.3
 
   packages/rate-limiter:
     dependencies:
@@ -79,9 +110,9 @@ importers:
       '@upstash/redis':
         specifier: ^1.35.8
         version: 1.35.8
-      dotenv:
-        specifier: ^17.2.3
-        version: 17.2.3
+      '@url-shortener/config':
+        specifier: workspace:*
+        version: link:../config
     devDependencies:
       '@types/node':
         specifier: ^25.0.3

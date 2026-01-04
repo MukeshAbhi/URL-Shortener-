@@ -2,21 +2,24 @@ import { Redis } from '@upstash/redis';
 
 let redis: Redis | undefined;
 
-function getRedis() {
-  const { UPSTASH_REDIS_REST_URL, UPSTASH_REDIS_REST_TOKEN } = process.env;
-
-  if(!UPSTASH_REDIS_REST_URL || !UPSTASH_REDIS_REST_TOKEN) {
-    throw new Error(
-      'Missing Redis credentials. Please set UPSTASH_REDIS_REST_URL and UPSTASH_REDIS_REST_TOKEN in your .env file'
-    );
-  }
+export function initRedis(config: {
+  url: string;
+  token: string;
+}) {
   if (!redis) {
     redis = new Redis({
-      url: UPSTASH_REDIS_REST_URL,
-      token: UPSTASH_REDIS_REST_TOKEN,
+      url: config.url,
+      token: config.token,
     });
   }
   return redis;
 }
 
-export { getRedis };
+export function getRedis(): Redis {
+  if (!redis) {
+    throw new Error(
+      'Redis not initialized. Call initRedis() at app startup.'
+    );
+  }
+  return redis;
+}

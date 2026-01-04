@@ -5,7 +5,7 @@
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "scripts": {
-    "build": "tsc",
+    "build": "tsc -b",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -18,7 +18,7 @@
   },
   "dependencies": {
     "@upstash/redis": "^1.35.8",
-    "dotenv": "^17.2.3"
+    "@url-shortener/config": "workspace:*"
   },
   "exports": {
     ".": {
