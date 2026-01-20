@@ -1,14 +1,20 @@
 import express from 'express';
-import { Url } from '@url-shortener/db';
+import { Url, connectToDB } from '@url-shortener/db';
 import { rateLimit } from '@url-shortener/rate-limiter';
 import 'dotenv/config';
 import { initRedis } from '@url-shortener/redis';
 import { validateEnv } from './utils/envSchema.js';
 
+const env = validateEnv();
+
+// Initialize Redis
 initRedis({
-  url: validateEnv().UPSTASH_REDIS_REST_URL,
-  token: validateEnv().UPSTASH_REDIS_REST_TOKEN,
+  url: env.UPSTASH_REDIS_REST_URL,
+  token: env.UPSTASH_REDIS_REST_TOKEN,
 })
+
+// Connect to MongoDB
+await connectToDB(env.MONGODB_URI);
 
 const app = express();
 

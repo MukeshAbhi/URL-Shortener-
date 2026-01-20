@@ -1,18 +1,28 @@
 import express from 'express';
+import cors from 'cors';
 import { rateLimit } from '@url-shortener/rate-limiter';
 import 'dotenv/config';
 import { initRedis } from '@url-shortener/redis';
 import { validateEnv } from './utils/envSchema.js';
 import { getNextSequence } from './utils/counter.js';
 import { encodeWithSuffix } from './utils/base62.js';
-import { Url } from '@url-shortener/db';
+import { Url, connectToDB } from '@url-shortener/db';
 
+const env = validateEnv();
+
+// Initialize Redis
 initRedis({
-  url: validateEnv().UPSTASH_REDIS_REST_URL,
-  token: validateEnv().UPSTASH_REDIS_REST_TOKEN,
+  url: env.UPSTASH_REDIS_REST_URL,
+  token: env.UPSTASH_REDIS_REST_TOKEN,
 })
 
+// Connect to MongoDB
+await connectToDB(env.MONGODB_URI);
+
 const app = express();
+
+// Enable CORS for all origins (adjust in production)
+app.use(cors());
 
 app.use(express.json());
 
@@ -26,7 +36,7 @@ app.use(async (req, res, next) => {
   next();
 });
 
-app.get('/', (req, res) => {
+app.get('/', (_req, res) => {
   res.send('Hello From API-Service!');
 });
 
