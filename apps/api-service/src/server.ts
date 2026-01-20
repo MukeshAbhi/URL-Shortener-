@@ -52,6 +52,17 @@ app.post('/url', async (req, res) => {
   res.json({ shortUrl });
 });
 
+app.get('/:shortUrl', async (req, res) => {
+  const { shortUrl } = req.params;
+  const url = await Url.findOne({ shortUrl });
+  if (!url) {
+    return res.status(404).json({ error: "Not found" });
+  }
+  url.clicks++;
+  await url.save();
+  res.redirect(url.longUrl);
+});
+
 app.listen(3000, () => {
-  console.log('Example app listening on port 3000!');
+  console.log('API app listening on port 3000!');
 });

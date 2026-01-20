@@ -7,8 +7,8 @@ const App = () => {
   const [shortUrl, setShortUrl] = useState('');
   const [loading, setLoading] = useState(false);
 
-  const API_SERVICE_URL = 'http://localhost:3000';
-  const REDIRECT_SERVICE_URL = 'http://localhost:3001';
+  const API_SERVICE_URL = import.meta.env.VITE_API_SERVICE_URL || 'http://localhost:3000';
+  //const REDIRECT_SERVICE_URL = import.meta.env.VITE_REDIRECT_SERVICE_URL || 'http://localhost:3001';
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -35,7 +35,7 @@ const App = () => {
         url: longUrl,
       });
 
-      const fullShortUrl = `${REDIRECT_SERVICE_URL}/${response.data.shortUrl}`;
+      const fullShortUrl = `${API_SERVICE_URL}/${response.data.shortUrl}`;
       setShortUrl(fullShortUrl);
       toast.success('URL shortened successfully!', { id: loadingToast });
     } catch (err) {
