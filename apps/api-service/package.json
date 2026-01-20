@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
+  "type": "module",
   "scripts": {
     "dev": "tsc && node dist/server.js",
     "build": "tsc",
@@ -20,6 +21,7 @@
   "dependencies": {
     "@url-shortener/redis": "workspace:*",
     "@url-shortener/rate-limiter": "workspace:*",
+    "@url-shortener/db": "workspace:*",
     "dotenv": "^17.2.3",
     "express": "^5.2.1",
     "zod": "^4.2.1"

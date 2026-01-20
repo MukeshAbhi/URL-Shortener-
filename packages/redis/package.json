@@ -17,8 +17,7 @@
     "typescript": "^5.9.3"
   },
   "dependencies": {
-    "@upstash/redis": "^1.35.8",
-    "@url-shortener/config": "workspace:*"
+    "@upstash/redis": "^1.35.8"
   },
   "exports": {
     ".": {

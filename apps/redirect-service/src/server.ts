@@ -1,11 +1,9 @@
 import express from 'express';
+import { Url } from '@url-shortener/db';
 import { rateLimit } from '@url-shortener/rate-limiter';
 import 'dotenv/config';
 import { initRedis } from '@url-shortener/redis';
 import { validateEnv } from './utils/envSchema.js';
-import { getNextSequence } from './utils/counter.js';
-import { encodeWithSuffix } from './utils/base62.js';
-import { Url } from '@url-shortener/db';
 
 initRedis({
   url: validateEnv().UPSTASH_REDIS_REST_URL,
@@ -13,8 +11,6 @@ initRedis({
 })
 
 const app = express();
-
-app.use(express.json());
 
 app.use(async (req, res, next) => {
   const ip = req.ip;
@@ -26,22 +22,17 @@ app.use(async (req, res, next) => {
   next();
 });
 
-app.get('/', (req, res) => {
-  res.send('Hello From API-Service!');
-});
-
-
-app.post('/url', async (req, res) => {
-  const { url } = req.body;
+app.get('/:shortUrl', async (req, res) => {
+  const { shortUrl } = req.params;
+  const url = await Url.findOne({ shortUrl });
   if (!url) {
-    return res.status(400).json({ error: "Missing URL" });
+    return res.status(404).json({ error: "Not found" });
   }
-  const id = await getNextSequence("url");
-  const shortUrl = encodeWithSuffix(id);
-  await Url.create({ longUrl: url, shortUrl });
-  res.json({ shortUrl });
+  url.clicks++;
+  await url.save();
+  res.redirect(url.longUrl);
 });
 
-app.listen(3000, () => {
-  console.log('Example app listening on port 3000!');
+app.listen(3001, () => {
+  console.log('Example app listening on port 3001!');
 });

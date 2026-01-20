@@ -6,8 +6,5 @@
     "noImplicitOverride": true,
     "noUncheckedIndexedAccess": true,
     "baseUrl": ".",
-    "paths": {
-      "@url-shortener/*": ["packages/*/src"]
-    }
   }
 }
