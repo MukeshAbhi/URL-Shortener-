@@ -14,7 +14,7 @@ initRedis({
 })
 
 // Connect to MongoDB
-await connectToDB(env.MONGODB_URI);
+await connectToDB(env.MONGO_URI);
 
 const app = express();
 

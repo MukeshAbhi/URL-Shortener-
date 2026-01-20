@@ -14,7 +14,8 @@
 
     "start:api": "pnpm --filter api-service run start",
     "start:redirect": "pnpm --filter redirect-service run start",
-    "start": "pnpm run start:api && pnpm run start:redirect"
+    "start:client": "pnpm --filter client run dev",
+    "start": "pnpm --parallel --filter api-service --filter redirect-service --filter client run dev" 
   },
   "keywords": [],
   "author": "",
