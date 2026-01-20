@@ -19,6 +19,9 @@ importers:
       '@url-shortener/redis':
         specifier: workspace:*
         version: link:../../packages/redis
+      dotenv:
+        specifier: ^17.2.3
+        version: 17.2.3
       express:
         specifier: ^5.2.1
         version: 5.2.1
